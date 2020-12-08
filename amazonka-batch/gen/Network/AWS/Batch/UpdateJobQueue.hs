@@ -22,124 +22,126 @@
 --
 --
 module Network.AWS.Batch.UpdateJobQueue
-    (
+  (
     -- * Creating a Request
-      updateJobQueue
-    , UpdateJobQueue
+    updateJobQueue
+  , UpdateJobQueue
     -- * Request Lenses
-    , ujqState
-    , ujqPriority
-    , ujqComputeEnvironmentOrder
-    , ujqJobQueue
+  , ujqState
+  , ujqPriority
+  , ujqComputeEnvironmentOrder
+  , ujqJobQueue
 
     -- * Destructuring the Response
-    , updateJobQueueResponse
-    , UpdateJobQueueResponse
+  , updateJobQueueResponse
+  , UpdateJobQueueResponse
     -- * Response Lenses
-    , ujqrsJobQueueARN
-    , ujqrsJobQueueName
-    , ujqrsResponseStatus
-    ) where
+  , ujqrsJobQueueARN
+  , ujqrsJobQueueName
+  , ujqrsResponseStatus
+  )
+where
 
 import Network.AWS.Batch.Types
-import Network.AWS.Batch.Types.Product
 import Network.AWS.Lens
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateJobQueue' smart constructor.
-data UpdateJobQueue = UpdateJobQueue'
-  { _ujqState                   :: !(Maybe JQState)
-  , _ujqPriority                :: !(Maybe Int)
-  , _ujqComputeEnvironmentOrder :: !(Maybe [ComputeEnvironmentOrder])
-  , _ujqJobQueue                :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateJobQueue = UpdateJobQueue'{_ujqState ::
+                                      !(Maybe JQState),
+                                      _ujqPriority :: !(Maybe Int),
+                                      _ujqComputeEnvironmentOrder ::
+                                      !(Maybe [ComputeEnvironmentOrder]),
+                                      _ujqJobQueue :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateJobQueue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ujqState' - Describes the queue's ability to accept new jobs.
+-- * 'ujqState' - Describes the queue's ability to accept new jobs. If the job queue state is @ENABLED@ , it is able to accept jobs. If the job queue state is @DISABLED@ , new jobs cannot be added to the queue, but jobs already in the queue can finish.
 --
--- * 'ujqPriority' - The priority of the job queue. Job queues with a higher priority (or a higher integer value for the @priority@ parameter) are evaluated first when associated with same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of @10@ is given scheduling preference over a job queue with a priority value of @1@ .
+-- * 'ujqPriority' - The priority of the job queue. Job queues with a higher priority (or a higher integer value for the @priority@ parameter) are evaluated first when associated with the same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of @10@ is given scheduling preference over a job queue with a priority value of @1@ .
 --
--- * 'ujqComputeEnvironmentOrder' - Details the set of compute environments mapped to a job queue and their order relative to each other. This is one of the parameters used by the job scheduler to determine which compute environment should execute a given job.
+-- * 'ujqComputeEnvironmentOrder' - Details the set of compute environments mapped to a job queue and their order relative to each other. This is one of the parameters used by the job scheduler to determine which compute environment should run a given job. All of the compute environments must be either EC2 (@EC2@ or @SPOT@ ) or Fargate (@FARGATE@ or @FARGATE_SPOT@ ); EC2 and Fargate compute environments can't be mixed.
 --
 -- * 'ujqJobQueue' - The name or the Amazon Resource Name (ARN) of the job queue.
 updateJobQueue
-    :: Text -- ^ 'ujqJobQueue'
-    -> UpdateJobQueue
-updateJobQueue pJobQueue_ =
-  UpdateJobQueue'
-    { _ujqState = Nothing
-    , _ujqPriority = Nothing
-    , _ujqComputeEnvironmentOrder = Nothing
-    , _ujqJobQueue = pJobQueue_
-    }
+  :: Text -- ^ 'ujqJobQueue'
+  -> UpdateJobQueue
+updateJobQueue pJobQueue_ = UpdateJobQueue'
+  { _ujqState                   = Nothing
+  , _ujqPriority                = Nothing
+  , _ujqComputeEnvironmentOrder = Nothing
+  , _ujqJobQueue                = pJobQueue_
+  }
 
-
--- | Describes the queue's ability to accept new jobs.
+-- | Describes the queue's ability to accept new jobs. If the job queue state is @ENABLED@ , it is able to accept jobs. If the job queue state is @DISABLED@ , new jobs cannot be added to the queue, but jobs already in the queue can finish.
 ujqState :: Lens' UpdateJobQueue (Maybe JQState)
-ujqState = lens _ujqState (\ s a -> s{_ujqState = a})
+ujqState = lens _ujqState (\s a -> s { _ujqState = a })
 
--- | The priority of the job queue. Job queues with a higher priority (or a higher integer value for the @priority@ parameter) are evaluated first when associated with same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of @10@ is given scheduling preference over a job queue with a priority value of @1@ .
+-- | The priority of the job queue. Job queues with a higher priority (or a higher integer value for the @priority@ parameter) are evaluated first when associated with the same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of @10@ is given scheduling preference over a job queue with a priority value of @1@ .
 ujqPriority :: Lens' UpdateJobQueue (Maybe Int)
-ujqPriority = lens _ujqPriority (\ s a -> s{_ujqPriority = a})
+ujqPriority = lens _ujqPriority (\s a -> s { _ujqPriority = a })
 
--- | Details the set of compute environments mapped to a job queue and their order relative to each other. This is one of the parameters used by the job scheduler to determine which compute environment should execute a given job.
+-- | Details the set of compute environments mapped to a job queue and their order relative to each other. This is one of the parameters used by the job scheduler to determine which compute environment should run a given job. All of the compute environments must be either EC2 (@EC2@ or @SPOT@ ) or Fargate (@FARGATE@ or @FARGATE_SPOT@ ); EC2 and Fargate compute environments can't be mixed.
 ujqComputeEnvironmentOrder :: Lens' UpdateJobQueue [ComputeEnvironmentOrder]
-ujqComputeEnvironmentOrder = lens _ujqComputeEnvironmentOrder (\ s a -> s{_ujqComputeEnvironmentOrder = a}) . _Default . _Coerce
+ujqComputeEnvironmentOrder =
+  lens _ujqComputeEnvironmentOrder
+       (\s a -> s { _ujqComputeEnvironmentOrder = a })
+    . _Default
+    . _Coerce
 
 -- | The name or the Amazon Resource Name (ARN) of the job queue.
 ujqJobQueue :: Lens' UpdateJobQueue Text
-ujqJobQueue = lens _ujqJobQueue (\ s a -> s{_ujqJobQueue = a})
+ujqJobQueue = lens _ujqJobQueue (\s a -> s { _ujqJobQueue = a })
 
 instance AWSRequest UpdateJobQueue where
-        type Rs UpdateJobQueue = UpdateJobQueueResponse
-        request = postJSON batch
-        response
-          = receiveJSON
-              (\ s h x ->
-                 UpdateJobQueueResponse' <$>
-                   (x .?> "jobQueueArn") <*> (x .?> "jobQueueName") <*>
-                     (pure (fromEnum s)))
+  type Rs UpdateJobQueue = UpdateJobQueueResponse
+  request  = postJSON batch
+  response = receiveJSON
+    (\s h x ->
+      UpdateJobQueueResponse'
+        <$> (x .?> "jobQueueArn")
+        <*> (x .?> "jobQueueName")
+        <*> (pure (fromEnum s))
+    )
 
 instance Hashable UpdateJobQueue where
 
 instance NFData UpdateJobQueue where
 
 instance ToHeaders UpdateJobQueue where
-        toHeaders
-          = const
-              (mconcat
-                 ["Content-Type" =#
-                    ("application/x-amz-json-1.1" :: ByteString)])
+  toHeaders = const
+    (mconcat ["Content-Type" =# ("application/x-amz-json-1.1" :: ByteString)])
 
 instance ToJSON UpdateJobQueue where
-        toJSON UpdateJobQueue'{..}
-          = object
-              (catMaybes
-                 [("state" .=) <$> _ujqState,
-                  ("priority" .=) <$> _ujqPriority,
-                  ("computeEnvironmentOrder" .=) <$>
-                    _ujqComputeEnvironmentOrder,
-                  Just ("jobQueue" .= _ujqJobQueue)])
+  toJSON UpdateJobQueue' {..} = object
+    (catMaybes
+      [ ("state" .=) <$> _ujqState
+      , ("priority" .=) <$> _ujqPriority
+      , ("computeEnvironmentOrder" .=) <$> _ujqComputeEnvironmentOrder
+      , Just ("jobQueue" .= _ujqJobQueue)
+      ]
+    )
 
 instance ToPath UpdateJobQueue where
-        toPath = const "/v1/updatejobqueue"
+  toPath = const "/v1/updatejobqueue"
 
 instance ToQuery UpdateJobQueue where
-        toQuery = const mempty
+  toQuery = const mempty
 
 -- | /See:/ 'updateJobQueueResponse' smart constructor.
-data UpdateJobQueueResponse = UpdateJobQueueResponse'
-  { _ujqrsJobQueueARN    :: !(Maybe Text)
-  , _ujqrsJobQueueName   :: !(Maybe Text)
-  , _ujqrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateJobQueueResponse = UpdateJobQueueResponse'{_ujqrsJobQueueARN
+                                                      :: !(Maybe Text),
+                                                      _ujqrsJobQueueName ::
+                                                      !(Maybe Text),
+                                                      _ujqrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'UpdateJobQueueResponse' with the minimum fields required to make a request.
 --
@@ -151,26 +153,26 @@ data UpdateJobQueueResponse = UpdateJobQueueResponse'
 --
 -- * 'ujqrsResponseStatus' - -- | The response status code.
 updateJobQueueResponse
-    :: Int -- ^ 'ujqrsResponseStatus'
-    -> UpdateJobQueueResponse
-updateJobQueueResponse pResponseStatus_ =
-  UpdateJobQueueResponse'
-    { _ujqrsJobQueueARN = Nothing
-    , _ujqrsJobQueueName = Nothing
-    , _ujqrsResponseStatus = pResponseStatus_
-    }
-
+  :: Int -- ^ 'ujqrsResponseStatus'
+  -> UpdateJobQueueResponse
+updateJobQueueResponse pResponseStatus_ = UpdateJobQueueResponse'
+  { _ujqrsJobQueueARN    = Nothing
+  , _ujqrsJobQueueName   = Nothing
+  , _ujqrsResponseStatus = pResponseStatus_
+  }
 
 -- | The Amazon Resource Name (ARN) of the job queue.
 ujqrsJobQueueARN :: Lens' UpdateJobQueueResponse (Maybe Text)
-ujqrsJobQueueARN = lens _ujqrsJobQueueARN (\ s a -> s{_ujqrsJobQueueARN = a})
+ujqrsJobQueueARN = lens _ujqrsJobQueueARN (\s a -> s { _ujqrsJobQueueARN = a })
 
 -- | The name of the job queue.
 ujqrsJobQueueName :: Lens' UpdateJobQueueResponse (Maybe Text)
-ujqrsJobQueueName = lens _ujqrsJobQueueName (\ s a -> s{_ujqrsJobQueueName = a})
+ujqrsJobQueueName =
+  lens _ujqrsJobQueueName (\s a -> s { _ujqrsJobQueueName = a })
 
 -- | -- | The response status code.
 ujqrsResponseStatus :: Lens' UpdateJobQueueResponse Int
-ujqrsResponseStatus = lens _ujqrsResponseStatus (\ s a -> s{_ujqrsResponseStatus = a})
+ujqrsResponseStatus =
+  lens _ujqrsResponseStatus (\s a -> s { _ujqrsResponseStatus = a })
 
 instance NFData UpdateJobQueueResponse where

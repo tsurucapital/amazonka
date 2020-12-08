@@ -56,21 +56,82 @@ library
         , Network.AWS.Batch.DescribeJobQueues
         , Network.AWS.Batch.DescribeJobs
         , Network.AWS.Batch.ListJobs
+        , Network.AWS.Batch.ListTagsForResource
         , Network.AWS.Batch.RegisterJobDefinition
         , Network.AWS.Batch.SubmitJob
+        , Network.AWS.Batch.TagResource
         , Network.AWS.Batch.TerminateJob
         , Network.AWS.Batch.Types
+        , Network.AWS.Batch.UntagResource
         , Network.AWS.Batch.UpdateComputeEnvironment
         , Network.AWS.Batch.UpdateJobQueue
         , Network.AWS.Batch.Waiters
 
     other-modules:
-          Network.AWS.Batch.Types.Product
-        , Network.AWS.Batch.Types.Sum
+          Network.AWS.Batch.Types.ArrayJobDependency
+        , Network.AWS.Batch.Types.ArrayProperties
+        , Network.AWS.Batch.Types.ArrayPropertiesDetail
+        , Network.AWS.Batch.Types.ArrayPropertiesSummary
+        , Network.AWS.Batch.Types.AssignPublicIP
+        , Network.AWS.Batch.Types.AttemptContainerDetail
+        , Network.AWS.Batch.Types.AttemptDetail
+        , Network.AWS.Batch.Types.CEState
+        , Network.AWS.Batch.Types.CEStatus
+        , Network.AWS.Batch.Types.CEType
+        , Network.AWS.Batch.Types.CRAllocationStrategy
+        , Network.AWS.Batch.Types.CRType
+        , Network.AWS.Batch.Types.ComputeEnvironmentDetail
+        , Network.AWS.Batch.Types.ComputeEnvironmentOrder
+        , Network.AWS.Batch.Types.ComputeResource
+        , Network.AWS.Batch.Types.ComputeResourceUpdate
+        , Network.AWS.Batch.Types.ContainerDetail
+        , Network.AWS.Batch.Types.ContainerOverrides
+        , Network.AWS.Batch.Types.ContainerProperties
+        , Network.AWS.Batch.Types.ContainerSummary
+        , Network.AWS.Batch.Types.Device
+        , Network.AWS.Batch.Types.DeviceCgroupPermission
+        , Network.AWS.Batch.Types.EC2Configuration
+        , Network.AWS.Batch.Types.EvaluateOnExit
+        , Network.AWS.Batch.Types.FargatePlatformConfiguration
+        , Network.AWS.Batch.Types.Host
+        , Network.AWS.Batch.Types.JQState
+        , Network.AWS.Batch.Types.JQStatus
+        , Network.AWS.Batch.Types.JobDefinition
+        , Network.AWS.Batch.Types.JobDefinitionType
+        , Network.AWS.Batch.Types.JobDependency
+        , Network.AWS.Batch.Types.JobDetail
+        , Network.AWS.Batch.Types.JobQueueDetail
+        , Network.AWS.Batch.Types.JobStatus
+        , Network.AWS.Batch.Types.JobSummary
+        , Network.AWS.Batch.Types.JobTimeout
+        , Network.AWS.Batch.Types.KeyValuePair
+        , Network.AWS.Batch.Types.LaunchTemplateSpecification
+        , Network.AWS.Batch.Types.LinuxParameters
+        , Network.AWS.Batch.Types.LogConfiguration
+        , Network.AWS.Batch.Types.LogDriver
+        , Network.AWS.Batch.Types.MountPoint
+        , Network.AWS.Batch.Types.NetworkConfiguration
+        , Network.AWS.Batch.Types.NetworkInterface
+        , Network.AWS.Batch.Types.NodeDetails
+        , Network.AWS.Batch.Types.NodeOverrides
+        , Network.AWS.Batch.Types.NodeProperties
+        , Network.AWS.Batch.Types.NodePropertiesSummary
+        , Network.AWS.Batch.Types.NodePropertyOverride
+        , Network.AWS.Batch.Types.NodeRangeProperty
+        , Network.AWS.Batch.Types.PlatformCapability
+        , Network.AWS.Batch.Types.ResourceRequirement
+        , Network.AWS.Batch.Types.ResourceType
+        , Network.AWS.Batch.Types.RetryAction
+        , Network.AWS.Batch.Types.RetryStrategy
+        , Network.AWS.Batch.Types.Secret
+        , Network.AWS.Batch.Types.Tmpfs
+        , Network.AWS.Batch.Types.Ulimit
+        , Network.AWS.Batch.Types.Volume
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-batch-test
     type:              exitcode-stdio-1.0
@@ -94,6 +155,7 @@ test-suite amazonka-batch-test
         , amazonka-batch
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text
